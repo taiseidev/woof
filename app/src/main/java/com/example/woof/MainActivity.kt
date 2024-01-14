@@ -21,10 +21,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -135,14 +137,20 @@ fun DogItem(
     dog: Dog, modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val color by animateColorAsState(
+        targetValue = if (expanded) MaterialTheme.colorScheme.tertiaryContainer
+        else MaterialTheme.colorScheme.primaryContainer,
+    )
     Card(modifier = modifier) {
         Column(
-            modifier = Modifier.animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioNoBouncy,
-                    stiffness = Spring.StiffnessMedium
+            modifier = Modifier
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioNoBouncy,
+                        stiffness = Spring.StiffnessMedium
+                    )
                 )
-            )
+                .background(color)
         ) {
             Row(
                 modifier = Modifier
@@ -231,7 +239,7 @@ fun DogIcon(
 fun DogInformation(
     @StringRes dogName: Int, dogAge: Int, modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(modifier = modifier) {
         Text(
             text = stringResource(dogName),
             style = MaterialTheme.typography.displayMedium,
