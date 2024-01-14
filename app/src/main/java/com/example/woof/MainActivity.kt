@@ -142,6 +142,29 @@ fun DogItem(
             Spacer(modifier = Modifier.weight(1f))
             DogItemButton(expanded = expanded, onClick = {}, modifier = modifier)
         }
+        DogHobby(
+            dogHobby = dog.hobbies,
+            modifier = Modifier.padding(
+                start = dimensionResource(R.dimen.padding_medium),
+                top = dimensionResource(R.dimen.padding_small),
+                end = dimensionResource(R.dimen.padding_medium),
+                bottom = dimensionResource(R.dimen.padding_medium)
+            )
+        )
+    }
+}
+
+@Composable
+fun DogHobby(
+    @StringRes dogHobby: Int, modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            text = stringResource(id = R.string.about), style = MaterialTheme.typography.titleSmall
+        )
+        Text(text = stringResource(id = dogHobby), style = MaterialTheme.typography.bodyLarge)
     }
 }
 
