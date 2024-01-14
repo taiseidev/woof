@@ -25,6 +25,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -138,6 +139,7 @@ fun DogItem(
         ) {
             DogIcon(dog.imageResourceId)
             DogInformation(dog.name, dog.age)
+            Spacer(modifier = Modifier.weight(1f))
             DogItemButton(expanded = expanded, onClick = {}, modifier = modifier)
         }
     }
